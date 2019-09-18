@@ -1,6 +1,6 @@
 Introduction
 ---
-Thanks for considering me for the role by taking this frontend technical assessment.
+Thanks for considering me for the role and allowing me to take this frontend technical assessment.
 
 Exercise 1
 ---
