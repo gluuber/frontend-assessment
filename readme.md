@@ -8,7 +8,7 @@ exercise1-desktop_mobile.html is styled to suit both desktop and mobile user age
 
 Exercise 2
 ---
-exercise2-tabs_accordion.html will load either Tabs or Accordion views depending on user agent.
+exercise2-tabs_accordion.html will display either Tabs or Accordion views on page load depending on user agent.
 
 ###### Bonus points
 * Explain why the result of `('b' + 'a' + + 'a' + 'a').toLowerCase()` is `banana`.
