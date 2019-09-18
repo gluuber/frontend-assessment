@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>exercise2-tabs/accordion: MindArc</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" type="text/css" media="all" /> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="style.css">
+
+        <script>
+            // Script toggles between Accordion or Tabs only when page loaded/refreshed.
+            // User agent test toggle.
+            var is_mobile_device = false;
+
+            // Document object fully loaded and ready to be tweaked...
+            $(document).ready(function () {
+                // Check for device being used
+                var is_mobile_device = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+                var json = $.ajax({
+                    dataType: "json",
+                    url: "data.json",
+                    mimeType: "application/json",
+                    success: function (result) {
+                        if (is_mobile_device) { // Smart phone - load Accordion
+                            // Append json data to document object
+                            $.each(result, function (count, data) {
+                                $("#appendage").append($('<h3>' + data.title + '</h3>'));
+                                $("#appendage").append($('<div><p>' + data.content + '</p></div>'));
+
+                            });
+                            // Activate accordion functionality
+                            $("#appendage").accordion();
+                        } else if (!is_mobile_device) { // Desktop - load Tabs
+                            // Append json data to document object
+                            $("#appendage").append('<ul></ul>');
+                            $.each(result, function (count, data) {
+                                $("#appendage>ul").append($('<li><a href="#tabs-' + count + '">' + data.title + '</li>'));
+                                $("#appendage").append($('<div id="tabs-' + count + '"><p>' + data.content + '</p></div>'));
+                            });
+                            // Activate tabs functionality
+                            $("#appendage").tabs({
+                                active: 0
+                            });
+                        }
+                    },
+                    error: function (e) {
+                        console.log("jQuery error message = " + e.message);
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Parent node for Tabs or Accordion -->
+        <div id="appendage"></div>
+    </body>
+</html>
